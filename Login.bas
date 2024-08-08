@@ -2,7 +2,7 @@
 'Codigo para realização de login em servidor sap scripting
 'Attribute VB_Name = "Login"
 
-Sub Login()
+Sub SAPLogin()
 
     Dim SapGuiAuto As Object
     Dim SAPApp As Object
