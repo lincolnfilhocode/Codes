@@ -1,2 +1,4 @@
-# Codes
-My codes
+# My codes
+
+Learning VBA and python atm
+
