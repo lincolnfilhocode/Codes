@@ -1,4 +1,4 @@
-Função para Deslogar e fechar o SAP
+'Função para Deslogar e fechar o SAP
 
 Attribute VB_Name = "LogOff"
 Sub SAPLogoff()
