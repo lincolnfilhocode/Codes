@@ -1,4 +1,7 @@
-Attribute VB_Name = "Login"
+
+'Codigo para realiza√ß√£o de login em servidor sap scripting
+'Attribute VB_Name = "Login"
+
 Sub Login()
 
     Dim SapGuiAuto As Object
@@ -13,24 +16,23 @@ Sub Login()
     
     On Error Resume Next
     
-    
-    
-    'InicializaÁ„o de variaveis
-    SapGuiPath = "C:\Program Files\SAP\NWBC800\NWBC.exe"  'Alterar para localizaÁ„o do executavel de sap
+    'Inicializa√ß√£o de variaveis
+    SapGuiPath = "diretorio/NWBC.exe"  'Utilize o diretorio de seu executavel
     Set SapGuiAuto = GetObject("SAPGUISERVER")
     
-    'Verifica se sap j· est· aberto
+    'Verifica se sap j√° est√° aberto
     If SapGuiAuto Is Nothing Then
     
-        'Inicializa SAP Chr(34) = "
+        'Inicializa SAP // Chr(34) = "
         Set WsShell = CreateObject("WScript.Shell")
         WsShell.Run Chr(34) & SapGuiPath & Chr(34)
         
-        'Timer de 60s para esperar abertura//ajustar para tempo maximo de abertura para pior computador
+        'Timer de 60s para esperar abertura //Ajuste para tempo maximo do gargalo do computador
         SapGuiReady = False
         StartTime = Timer
         Timeout = 60
-        
+
+        'Tentar conectar ao sap apos abertura por tempo = timeout
         Do While Not SapGuiReady
             On Error Resume Next
             Set SapGuiAuto = GetObject("SAPGUISERVER")
@@ -39,7 +41,7 @@ Sub Login()
             If Not SapGuiAuto Is Nothing Then
                 SapGuiReady = True
             ElseIf Timer - StartTime > Timeout Then
-                MsgBox "Programa n„o inicializado"
+                MsgBox "Programa n√£o inicializado"
                 Exit Sub
             End If
             DoEvents
@@ -47,13 +49,15 @@ Sub Login()
         
    End If
    
-    'Login no servidor
+    'Conexao com script
     Set SAPApp = SapGuiAuto.GetScriptingEngine
-    
+
+    Conexao com servidor
     If IsObject(SAPApp) Then
-        Set SAPCon = SAPApp.OpenConnection("0318 - SA - PB0 - [ERP] (001)", True) 'Ajustar para servidor utilizado
+        Set SAPCon = SAPApp.OpenConnection("Seu servidor", True) 'Ajustar para servidor utilizado
     End If
-    
+
+    'Iniciando sessao
     If IsObject(SAPCon) Then
     Set session = SAPCon.Children(0)
     End If
